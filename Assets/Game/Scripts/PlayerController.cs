@@ -10,16 +10,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float streerSpeed;
     [SerializeField] int Gap;
     [SerializeField] TextMeshProUGUI ScoreText;
-    [SerializeField] TextMeshProUGUI GameOverTxt;
+    [SerializeField] GameObject parent, gameOverPanel;
     int scoreValue;
 
     [SerializeField] GameObject PlayerPref;
+    [SerializeField] List<GameObject> AllFood;
+    //[SerializeField] List<GameObject> EatenFood;
     List<GameObject> PlayerBody = new List<GameObject>();
     List<Vector3> PlayerPosition = new List<Vector3>();
+    int val = 0;
 
     private void Start()
     {
-        //GrowSnake();
+        while (val < 20)
+        {
+            FoodGenerate();
+            val++;
+        }
+        //val = 15;
     }
     private void Update()
     {
@@ -46,22 +54,45 @@ public class PlayerController : MonoBehaviour
         GameObject body = Instantiate(PlayerPref);
         PlayerBody.Add(body);
     }
+    //int value;
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "food")
         {
+            val--;
             Destroy(other.gameObject);
             scoreValue++;
             ScoreText.text = scoreValue.ToString();
             GrowSnake();
+            while (val < 15)
+            {
+                Debug.Log("Before val = "+val);
+                FoodGenerate();
+                val++;
+                Debug.Log("After val = "+val);
+            }
+
         }
         if(other.gameObject.tag == "wall")
         {
-            GameOverTxt.gameObject.SetActive(true);
+            Debug.Log("Wall detect in Triggerr");
+            Time.timeScale = 0;
+            gameOverPanel.SetActive(true);
         }
     }
-    public void RestartButton()
+    public void RetryButton()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
+    }
+    public void FoodGenerate()
+    {
+        Debug.Log("Function called");
+        int Generatefood = Random.Range(0, AllFood.Count);
+        float xPos = Random.Range(-23f, 23.5f);
+        float ZPos = Random.Range(-17.5f, 19f);
+        Vector3 spawnPos = new Vector3(xPos, -0.3f, ZPos);
+        GameObject game = Instantiate(AllFood[Generatefood], spawnPos, Quaternion.identity ,parent.transform);
+        //EatenFood.Add(game);
     }
 }
