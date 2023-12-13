@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 0f275934ddb545049a99ef09c2631df3, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 9d83bcd796da1b543a6dc0d4cc0911a7, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1051,7 +1051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   streerSpeed: 50
-  Gap: 5
+  Gap: 20
   ScoreTextGamePanel: {fileID: 1396867525}
   ScoreTextGameOverPanel: {fileID: 670929069}
   HighScoreTxt: {fileID: 1505441187}
