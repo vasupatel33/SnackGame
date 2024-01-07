@@ -15,7 +15,7 @@ public class JoystickController : MonoBehaviour
         Vector3 moveDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
 
         // Apply movement
-        transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
+            transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
 
         // Rotate the player based on the movement direction
         if (moveDirection != Vector3.zero)
